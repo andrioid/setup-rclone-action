@@ -3906,7 +3906,7 @@ async function main() {
     }
     const platform = `${import_os.default.platform()}-${arch}`;
     let toolPath = import_tool_cache.default.find(FILENAME, version, arch);
-    if (!toolPath) {
+    if (!toolPath || true) {
       const context = {
         PLATFORM: platform,
         RCLONE_VERSION: version
@@ -3916,8 +3916,8 @@ async function main() {
       });
       const dirName = `rclone-v${version}-${platform}`;
       const downloadPath = await import_tool_cache.default.downloadTool(rendered);
-      const extractPath = await (0, import_tool_cache.extractZip)(downloadPath, "./");
-      const extractedPath = import_path.default.join(dirName, FILENAME);
+      const extractPath = await (0, import_tool_cache.extractZip)(downloadPath);
+      const extractedPath = import_path.default.join(extractPath, dirName, FILENAME);
       toolPath = await import_tool_cache.default.cacheFile(extractedPath, FILENAME, FILENAME, version);
     }
     (0, import_core.debug)("toolpath:" + toolPath);

@@ -20,7 +20,7 @@ async function main() {
     const platform = `${os.platform()}-${arch}`; // Not tested with other than Linux
 
     let toolPath = cache.find(FILENAME, version, arch);
-    if (!toolPath) {
+    if (!toolPath || true) {
       const context: { [key: string]: string } = {
         PLATFORM: platform,
         RCLONE_VERSION: version,
@@ -31,9 +31,9 @@ async function main() {
       const dirName = `rclone-v${version}-${platform}`;
 
       const downloadPath = await cache.downloadTool(rendered);
-      const extractPath = await extractZip(downloadPath, "./");
+      const extractPath = await extractZip(downloadPath);
 
-      const extractedPath = path.join(dirName, FILENAME);
+      const extractedPath = path.join(extractPath, dirName, FILENAME);
 
       toolPath = await cache.cacheFile(
         extractedPath,
