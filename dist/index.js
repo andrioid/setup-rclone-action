@@ -3906,7 +3906,7 @@ async function main() {
     }
     const platform = `${import_os.default.platform()}-${arch}`;
     let toolPath = import_tool_cache.default.find(FILENAME, version, arch);
-    if (!toolPath || true) {
+    if (!toolPath) {
       const context = {
         PLATFORM: platform,
         RCLONE_VERSION: version

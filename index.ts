@@ -20,7 +20,7 @@ async function main() {
     const platform = `${os.platform()}-${arch}`; // Not tested with other than Linux
 
     let toolPath = cache.find(FILENAME, version, arch);
-    if (!toolPath || true) {
+    if (!toolPath) {
       const context: { [key: string]: string } = {
         PLATFORM: platform,
         RCLONE_VERSION: version,
