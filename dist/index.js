@@ -3914,10 +3914,11 @@ async function main() {
       const rendered = url.replace(/\{(\w+?)\}/g, (a, match) => {
         return context[match] || "";
       });
+      const dirName = rendered.substr(9, rendered.lastIndexOf("/"));
       const downloadPath = await import_tool_cache.default.downloadTool(rendered);
       const downloadedPath = await (0, import_tool_cache.extractZip)(downloadPath);
       (0, import_core.debug)("downloadedpath: " + downloadedPath);
-      const extractedPath = import_path.default.join(downloadedPath, FILENAME);
+      const extractedPath = import_path.default.join(dirName, FILENAME);
       toolPath = await import_tool_cache.default.cacheFile(extractedPath, FILENAME, FILENAME, version);
     }
     (0, import_core.debug)("toolpath:" + toolPath);
