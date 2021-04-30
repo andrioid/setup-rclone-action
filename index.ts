@@ -1,4 +1,4 @@
-import { addPath, getInput, setFailed, info } from "@actions/core";
+import { addPath, getInput, setFailed, debug } from "@actions/core";
 import os from "os";
 import cache, { extractZip } from "@actions/tool-cache";
 import { promisify } from "util";
@@ -31,7 +31,7 @@ async function main() {
 
       const downloadPath = await cache.downloadTool(rendered);
       const downloadedPath = await extractZip(downloadPath);
-      info("downloadedpath: " + downloadedPath);
+      debug("downloadedpath: " + downloadedPath);
       const extractedPath = path.join(downloadedPath, FILENAME);
       toolPath = await cache.cacheFile(
         extractedPath,
@@ -41,7 +41,7 @@ async function main() {
       );
     }
 
-    info("toolpath:" + toolPath);
+    debug("toolpath:" + toolPath);
 
     await chmod(path.join(toolPath, FILENAME), 0o755);
     addPath(toolPath);
