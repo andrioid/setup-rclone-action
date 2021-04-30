@@ -3917,7 +3917,7 @@ async function main() {
       const dirName = `rclone-v${version}-${platform}`;
       const downloadPath = await import_tool_cache.default.downloadTool(rendered);
       await (0, import_tool_cache.extractZip)(downloadPath);
-      const extractedPath = import_path.default.join(dirName, FILENAME);
+      const extractedPath = import_path.default.join(FILENAME);
       toolPath = await import_tool_cache.default.cacheFile(extractedPath, FILENAME, FILENAME, version);
     }
     (0, import_core.debug)("toolpath:" + toolPath);
