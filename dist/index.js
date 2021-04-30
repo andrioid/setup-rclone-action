@@ -3578,7 +3578,7 @@ var require_tool_cache = __commonJS((exports2) => {
     });
   }
   exports2.extract7z = extract7z;
-  function extractTar2(file, dest, flags = "xz") {
+  function extractTar(file, dest, flags = "xz") {
     return __awaiter(this, void 0, void 0, function* () {
       if (!file) {
         throw new Error("parameter 'file' is required");
@@ -3620,7 +3620,7 @@ var require_tool_cache = __commonJS((exports2) => {
       return dest;
     });
   }
-  exports2.extractTar = extractTar2;
+  exports2.extractTar = extractTar;
   function extractXar(file, dest, flags = []) {
     return __awaiter(this, void 0, void 0, function* () {
       assert_1.ok(IS_MAC, "extractXar() not supported on current OS");
@@ -3642,7 +3642,7 @@ var require_tool_cache = __commonJS((exports2) => {
     });
   }
   exports2.extractXar = extractXar;
-  function extractZip(file, dest) {
+  function extractZip2(file, dest) {
     return __awaiter(this, void 0, void 0, function* () {
       if (!file) {
         throw new Error("parameter 'file' is required");
@@ -3656,7 +3656,7 @@ var require_tool_cache = __commonJS((exports2) => {
       return dest;
     });
   }
-  exports2.extractZip = extractZip;
+  exports2.extractZip = extractZip2;
   function extractZipWin(file, dest) {
     return __awaiter(this, void 0, void 0, function* () {
       const escapedFile = file.replace(/'/g, "''").replace(/"|\n|\r/g, "");
@@ -3915,7 +3915,7 @@ async function main() {
         return context[match] || "";
       });
       const downloadPath = await import_tool_cache.default.downloadTool(rendered);
-      const extractedPath = import_path.default.join(await (0, import_tool_cache.extractTar)(downloadPath), FILENAME);
+      const extractedPath = import_path.default.join(await (0, import_tool_cache.extractZip)(downloadPath), FILENAME);
       toolPath = await import_tool_cache.default.cacheFile(extractedPath, FILENAME, FILENAME, version);
     }
     (0, import_core.info)("toolpath:" + toolPath);

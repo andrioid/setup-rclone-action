@@ -11,7 +11,7 @@ inputs:
   rclone-url:
     description: "Where to download from"
     required: false
-    default: "https://github.com/rclone/rclone/releases/download/v{RCLONE_VERSION}/rclone-v{RCLONE_VERSION}-{PLATFORM}.tgz"
+    default: "https://github.com/rclone/rclone/releases/download/v{RCLONE_VERSION}/rclone-v{RCLONE_VERSION}-{PLATFORM}.zip"
 runs:
   using: "node12"
   main: "dist/index.js"
