@@ -13,22 +13,22 @@ async function main() {
   try {
     const url = getInput("rclone-url");
     const version = getInput("rclone-version");
-    const platform = "linux"; // TODO: Add other platforms
     let arch = os.arch();
     if (arch === "x64") {
       arch = "amd64";
     }
+    const platform = `${os.platform()}-${arch}`; // Not tested with other than Linux
 
     let toolPath = cache.find(FILENAME, version, arch);
     if (!toolPath) {
       const context: { [key: string]: string } = {
-        PLATFORM: `${platform}-${arch}`,
+        PLATFORM: platform,
         RCLONE_VERSION: version,
       };
       const rendered = url.replace(/\{(\w+?)\}/g, (a, match) => {
         return context[match] || "";
       });
-      const dirName = rendered.substr(0, rendered.lastIndexOf("/"));
+      const dirName = `rclone-v${version}-${platform}`;
 
       const downloadPath = await cache.downloadTool(rendered);
       await extractZip(downloadPath);

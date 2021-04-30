@@ -3900,21 +3900,21 @@ async function main() {
   try {
     const url = (0, import_core.getInput)("rclone-url");
     const version = (0, import_core.getInput)("rclone-version");
-    const platform = "linux";
     let arch = import_os.default.arch();
     if (arch === "x64") {
       arch = "amd64";
     }
+    const platform = `${import_os.default.platform()}-${arch}`;
     let toolPath = import_tool_cache.default.find(FILENAME, version, arch);
     if (!toolPath) {
       const context = {
-        PLATFORM: `${platform}-${arch}`,
+        PLATFORM: platform,
         RCLONE_VERSION: version
       };
       const rendered = url.replace(/\{(\w+?)\}/g, (a, match) => {
         return context[match] || "";
       });
-      const dirName = rendered.substr(0, rendered.lastIndexOf("/"));
+      const dirName = `rclone-v${version}-${platform}`;
       const downloadPath = await import_tool_cache.default.downloadTool(rendered);
       await (0, import_tool_cache.extractZip)(downloadPath);
       const extractedPath = import_path.default.join(dirName, FILENAME);
