@@ -1,0 +1,17 @@
+name: "Rclone: setup-rclone"
+description: "Install a version of rclone"
+branding:
+  icon: "box"
+  color: "purple"
+inputs:
+  rclone-version: # id of input
+    description: "What version of rclone to install"
+    required: false
+    default: "1.55.1"
+  rclone-url:
+    description: "Where to download from"
+    required: false
+    default: "https://github.com/rclone/rclone/releases/download/v{RCLONE_VERSION}/rclone-v{RCLONE_VERSION}-{PLATFORM}.tgz"
+runs:
+  using: "node12"
+  main: "dist/index.js"
