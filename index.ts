@@ -28,12 +28,13 @@ async function main() {
       const rendered = url.replace(/\{(\w+?)\}/g, (a, match) => {
         return context[match] || "";
       });
-      const dirName = rendered.substr(9, rendered.lastIndexOf("/"));
+      const dirName = rendered.substr(0, rendered.lastIndexOf("/"));
 
       const downloadPath = await cache.downloadTool(rendered);
-      const downloadedPath = await extractZip(downloadPath);
-      debug("downloadedpath: " + downloadedPath);
+      await extractZip(downloadPath);
+
       const extractedPath = path.join(dirName, FILENAME);
+
       toolPath = await cache.cacheFile(
         extractedPath,
         FILENAME,
