@@ -30,10 +30,8 @@ async function main() {
       });
 
       const downloadPath = await cache.downloadTool(rendered);
-      const extractedPath = path.join(
-        await extractZip(downloadPath, "./"),
-        FILENAME
-      );
+      const downloadedPath = await extractZip(downloadPath);
+      const extractedPath = path.join(downloadedPath, FILENAME);
       toolPath = await cache.cacheFile(
         extractedPath,
         FILENAME,
