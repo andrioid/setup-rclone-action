@@ -31,9 +31,9 @@ async function main() {
       const dirName = `rclone-v${version}-${platform}`;
 
       const downloadPath = await cache.downloadTool(rendered);
-      await extractZip(downloadPath);
+      const extractPath = await extractZip(downloadPath);
 
-      const extractedPath = path.join(FILENAME);
+      const extractedPath = path.join(extractPath, dirName, FILENAME);
 
       toolPath = await cache.cacheFile(
         extractedPath,
